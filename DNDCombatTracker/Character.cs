@@ -98,7 +98,7 @@ namespace DNDCombatTracker
         public void TakeDamage(int amt, Character attacker = null)
         {
             HitPoints = Math.Min(HitPoints - amt, HitPointMax);
-            if (attacker != null)
+            if (attacker == null)
                 AddLogEntry(Name + " took " + amt + " damage from environment.");
             if (HitPoints <= 0)
                 Die(attacker);
@@ -106,8 +106,8 @@ namespace DNDCombatTracker
 
         public void DealDamage(Character target, int amt)
         {
-            target.TakeDamage(amt, this);
             AddLogEntry(Name + (amt >= 0 ? " hit " : " healed ") + target.Name + " for " + Math.Abs(amt) + " hit points.");
+            target.TakeDamage(amt, this);
         }
 
         public Character ShowAttackDialog(List<Character> targets)

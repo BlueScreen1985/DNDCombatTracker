@@ -91,28 +91,9 @@ namespace DNDCombatTracker
         private void PromptAttack(Character actor)
         {
             Character target = actor.ShowAttackDialog(new List<Character>(Characters));
-            if (target != null && target.HitPoints <= 0 && !target.IsPlayerCharacter)
-            {
-                string logMsg = target.Name + " was killed";
-                AddLogEntry(logMsg);
-
-                if (RemoveNPCsOnDeath)
-                    RemoveCharacter(target);
-            }
         }
 
-        private void DamageCharacter(Character actor)
-        {
-            actor.ShowDamageDialog();
-            if (actor.HitPoints <= 0 && !actor.IsPlayerCharacter)
-            {
-                string logMsg = actor.Name + " was killed";
-                AddLogEntry(logMsg);
-
-                if (RemoveNPCsOnDeath)
-                    RemoveCharacter(actor);
-            }
-        }
+        private void DamageCharacter(Character actor) => actor.ShowDamageDialog();
 
         private void CharacterActionsAttack_Click(object sender, RoutedEventArgs e) => PromptAttack(ActiveCharacter);
         private void CharacterActionsDamage_Click(object sender, RoutedEventArgs e) => DamageCharacter(ActiveCharacter);
@@ -188,6 +169,7 @@ namespace DNDCombatTracker
                 Characters.Add(character); // Otherwise just append it to the list
 
             character.LogEntryAdded += LogEntryAdded;
+            character.OnDeath += OnCharacterDeath;
         }
 
         // Inserts a character in the list in the right initiative order
@@ -198,6 +180,9 @@ namespace DNDCombatTracker
                 i++;
 
             Characters.Insert(i, character);
+
+            character.LogEntryAdded += LogEntryAdded;
+            character.OnDeath += OnCharacterDeath;
         }
 
         // TODO: Find a better way to do this
@@ -273,6 +258,15 @@ namespace DNDCombatTracker
                 ActiveCharacterIndex = 0; // Prevents OOI errors
 
             NotifyPropertyChanged("ActiveCharacter");
+        }
+
+        private void OnCharacterDeath(object sender, CharacterDeathEventArgs e)
+        {
+            Character dead = sender as Character;
+            AddLogEntry(dead.Name + " was killed" + (e.Killer != null ? " by " + e.Killer.Name + " " : "") + ".");
+
+            if (!dead.IsPlayerCharacter && RemoveNPCsOnDeath)
+                RemoveCharacter(dead); // Never remove dead players
         }
 
         private void EndTurn_Click(object sender, RoutedEventArgs e) => NextTurn();

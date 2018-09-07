@@ -1,0 +1,27 @@
+﻿<Window x:Class="DNDCombatTracker.AddCharacterDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DNDCombatTracker"
+        mc:Ignorable="d"
+        Title="Add Character" Height="165" Width="300" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" ResizeMode="NoResize" SizeToContent="WidthAndHeight">
+    <Grid Width="294" Height="137">
+        <Button x:Name="ButtonCancel" Content="Cancel" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="75" Margin="0,0,10,10" Click="ButtonCancel_Click"/>
+        <Button x:Name="ButtonOK" Content="OK" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="75" Margin="0,0,90,10" Click="ButtonOK_Click"/>
+        <Label Content="Character Name" VerticalAlignment="Top" Margin="0,10,186,0" HorizontalAlignment="Right" Width="96"/>
+        <TextBox x:Name="CharacterNameBox" Height="23" Margin="111,12,10,0" TextWrapping="Wrap" Text="{Binding Path=CharacterName}" VerticalAlignment="Top"/>
+
+        <Label x:Name="InitiativeBoxLabel" Content="Initiative" VerticalAlignment="Top" Margin="0,66,186,0" HorizontalAlignment="Right"/>
+        <TextBox x:Name="InitiativeBox" PreviewTextInput="FilterNumberInput" Height="23" Margin="111,68,141,0" TextWrapping="Wrap" Text="{Binding Path=Initiative}" VerticalAlignment="Top"/>
+
+        <Label Content="Max HP" VerticalAlignment="Top" Margin="0,38,55,0" HorizontalAlignment="Right"/>
+        <TextBox x:Name="MaxHPBox" PreviewTextInput="FilterNumberInput" Height="23" Margin="242,40,10,0" TextWrapping="Wrap" Text="{Binding Path=MaxHP}" VerticalAlignment="Top"/>
+        <Label Content="Current HP" VerticalAlignment="Top" Margin="0,66,55,0" HorizontalAlignment="Right"/>
+        <TextBox x:Name="CurrentHPBox" PreviewTextInput="FilterNumberInput" Height="23" Margin="242,68,10,0" TextWrapping="Wrap" Text="{Binding Path=CurrentHP}" VerticalAlignment="Top"/>
+        <CheckBox x:Name="PlayerCharacterCheck" Content="Player Character" HorizontalAlignment="Left" Margin="12,0,0,13" VerticalAlignment="Bottom" IsChecked="{Binding Path=IsPlayerCharacter}"/>
+        <Label Content="Armor Class" VerticalAlignment="Top" Margin="0,38,186,0" HorizontalAlignment="Right"/>
+        <TextBox x:Name="ArmorClassBox" PreviewTextInput="FilterNumberInput" Height="23" Margin="111,40,141,0" TextWrapping="Wrap" Text="{Binding ArmorClass}" VerticalAlignment="Top"/>
+
+    </Grid>
+</Window>

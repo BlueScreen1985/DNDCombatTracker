@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DNDCombatTracker"
         mc:Ignorable="d"
-        Title="Attack/Heal..." ResizeMode="NoResize" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" SizeToContent="WidthAndHeight">
+        Title="Attack/Heal..." ResizeMode="NoResize" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" SizeToContent="WidthAndHeight" ShowInTaskbar="False" Topmost="True">
     <Grid Width="280" Height="108">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>

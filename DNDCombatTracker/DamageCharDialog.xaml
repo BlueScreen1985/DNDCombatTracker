@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:DNDCombatTracker"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d"
-        Title="Damage Character" Height="136" Width="248" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" ResizeMode="NoResize" SizeToContent="WidthAndHeight">
+        Title="Damage Character" Height="136" Width="248" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" ResizeMode="NoResize" SizeToContent="WidthAndHeight" ShowInTaskbar="False" Topmost="True">
     <Grid Width="242" Height="108">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>

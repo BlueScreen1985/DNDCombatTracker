@@ -149,17 +149,31 @@ namespace DNDCombatTracker
 
         private void AddCharacter_Click(object sender, RoutedEventArgs e)
         {
-            AddCharacterDialog characterDialog = new AddCharacterDialog();
-            if (characterDialog.ShowDialog() == true)
+            AddCharacterDialog addCharacterDialog = new AddCharacterDialog();
+            if (addCharacterDialog.ShowDialog() == true)
             {
-                Character newCharacter = new Character
+                Character newCharacter;
+                if (addCharacterDialog.IsPlayerCharacter)
                 {
-                    Name = characterDialog.CharacterName,
-                    IsPlayerCharacter = characterDialog.IsPlayerCharacter,
-                    Initiative = characterDialog.Initiative,
-                    HitPointMax = characterDialog.MaxHP,
-                    HitPoints = characterDialog.CurrentHP
-                };
+                    newCharacter = new PlayerCharacter
+                    {
+                        Name = addCharacterDialog.CharacterName,
+                        Initiative = addCharacterDialog.Initiative,
+                        HitPointMax = addCharacterDialog.MaxHP,
+                        HitPoints = addCharacterDialog.CurrentHP,
+                        //IsPlayerCharacter = characterDialog.IsPlayerCharacter
+                    };
+                }
+                else {
+                    newCharacter = new Character
+                    {
+                        Name = addCharacterDialog.CharacterName,
+                        Initiative = addCharacterDialog.Initiative,
+                        HitPointMax = addCharacterDialog.MaxHP,
+                        HitPoints = addCharacterDialog.CurrentHP,
+                        //IsPlayerCharacter = characterDialog.IsPlayerCharacter
+                    };
+                }
 
                 AddCharacter(newCharacter);
                 AddLogEntry(newCharacter.NameAndIsPlayer + " has entered combat with initiative " + newCharacter.Initiative + ".");

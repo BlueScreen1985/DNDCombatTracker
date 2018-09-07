@@ -58,14 +58,29 @@ namespace DNDCombatTracker
             AddCharacterDialog addCharacterDialog = new AddCharacterDialog(Visibility.Hidden);
             if (addCharacterDialog.ShowDialog() == true)
             {
-                Character newCharacter = new Character
+                Character newCharacter;
+                if (addCharacterDialog.IsPlayerCharacter)
                 {
-                    Name = addCharacterDialog.CharacterName,
-                    ArmorClass = addCharacterDialog.ArmorClass,
-                    HitPoints = addCharacterDialog.CurrentHP,
-                    HitPointMax = addCharacterDialog.MaxHP,
-                    IsPlayerCharacter = addCharacterDialog.IsPlayerCharacter
-                };
+                    newCharacter = new PlayerCharacter
+                    {
+                        Name = addCharacterDialog.CharacterName,
+                        ArmorClass = addCharacterDialog.ArmorClass,
+                        HitPoints = addCharacterDialog.CurrentHP,
+                        HitPointMax = addCharacterDialog.MaxHP,
+                        //IsPlayerCharacter = addCharacterDialog.IsPlayerCharacter
+                    };
+                }
+                else
+                {
+                    newCharacter = new Character
+                    {
+                        Name = addCharacterDialog.CharacterName,
+                        ArmorClass = addCharacterDialog.ArmorClass,
+                        HitPoints = addCharacterDialog.CurrentHP,
+                        HitPointMax = addCharacterDialog.MaxHP,
+                        //IsPlayerCharacter = addCharacterDialog.IsPlayerCharacter
+                    };
+                }
 
                 PartyMembers.Add(newCharacter);
             }

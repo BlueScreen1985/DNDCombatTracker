@@ -69,6 +69,7 @@ namespace DNDCombatTracker
             }
         }
 
+        /*
         private bool isPlayerCharacter = false;
         public bool IsPlayerCharacter
         {
@@ -80,6 +81,8 @@ namespace DNDCombatTracker
                 NotifyPropertyChanged("IsPlayerCharacterStr");
             }
         }
+        */
+        public bool IsPlayerCharacter => this is PlayerCharacter; // Amazing, this looks like pseudocode
 
         private string notes = "";
         public string Notes
@@ -92,16 +95,18 @@ namespace DNDCombatTracker
             }
         }
 
-        public void TakeDamage(int amt, bool dealtByChar = false)
+        public void TakeDamage(int amt, Character attacker = null)
         {
             HitPoints = Math.Min(HitPoints - amt, HitPointMax);
-            if (!dealtByChar)
+            if (attacker != null)
                 AddLogEntry(Name + " took " + amt + " damage from environment.");
+            if (HitPoints <= 0)
+                Die(attacker);
         }
 
         public void DealDamage(Character target, int amt)
         {
-            target.TakeDamage(amt, true);
+            target.TakeDamage(amt, this);
             AddLogEntry(Name + (amt >= 0 ? " hit " : " healed ") + target.Name + " for " + Math.Abs(amt) + " hit points.");
         }
 
@@ -133,5 +138,8 @@ namespace DNDCombatTracker
 
         public event LogEntryEventHandler LogEntryAdded;
         public void AddLogEntry(string logEntry) => LogEntryAdded?.Invoke(this, new LogEntryEventArgs(logEntry));
+
+        public event CharacterDeathEventHandler OnDeath;
+        public void Die(Character killer) => OnDeath?.Invoke(this, new CharacterDeathEventArgs(killer));
     }
 }

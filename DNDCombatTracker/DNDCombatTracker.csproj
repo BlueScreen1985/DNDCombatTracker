@@ -91,6 +91,7 @@
       <DependentUpon>AttackDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Character.cs" />
+    <Compile Include="CharacterDeathEvent.cs" />
     <Compile Include="DamageCharDialog.xaml.cs">
       <DependentUpon>DamageCharDialog.xaml</DependentUpon>
     </Compile>
@@ -122,6 +123,7 @@
     <Compile Include="NoteEditorDialog.xaml.cs">
       <DependentUpon>NoteEditorDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PlayerCharacter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

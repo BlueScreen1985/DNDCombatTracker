@@ -91,9 +91,12 @@
       <DependentUpon>AttackDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Character.cs" />
-    <Compile Include="CharacterDeathEvent.cs" />
+    <Compile Include="CharacterHitEvent.cs" />
     <Compile Include="DamageCharDialog.xaml.cs">
       <DependentUpon>DamageCharDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DeathSaveDialog.xaml.cs">
+      <DependentUpon>DeathSaveDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="InitiativeDialog.xaml.cs">
       <DependentUpon>InitiativeDialog.xaml</DependentUpon>
@@ -103,6 +106,10 @@
       <DependentUpon>CombatTracker.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="DeathSaveDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="InitiativeDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -124,6 +131,7 @@
       <DependentUpon>NoteEditorDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="PlayerCharacter.cs" />
+    <Compile Include="PlayerStabilizedEvent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

@@ -169,7 +169,7 @@ namespace DNDCombatTracker
                 Characters.Add(character); // Otherwise just append it to the list
 
             character.LogEntryAdded += LogEntryAdded;
-            character.OnDeath += OnCharacterDeath;
+            character.OnHit += OnCharacterHit;
         }
 
         // Inserts a character in the list in the right initiative order
@@ -182,7 +182,7 @@ namespace DNDCombatTracker
             Characters.Insert(i, character);
 
             character.LogEntryAdded += LogEntryAdded;
-            character.OnDeath += OnCharacterDeath;
+            character.OnHit += OnCharacterHit;
         }
 
         // TODO: Find a better way to do this
@@ -260,13 +260,22 @@ namespace DNDCombatTracker
             NotifyPropertyChanged("ActiveCharacter");
         }
 
-        private void OnCharacterDeath(object sender, CharacterDeathEventArgs e)
+        private void OnCharacterHit(object sender, CharacterHitEventArgs e)
         {
-            Character dead = sender as Character;
-            AddLogEntry(dead.Name + " was killed" + (e.Killer != null ? " by " + e.Killer.Name + " " : "") + ".");
+            Character hit = sender as Character;
 
-            if (!dead.IsPlayerCharacter && RemoveNPCsOnDeath)
-                RemoveCharacter(dead); // Never remove dead players
+            // Print damage log
+            if (e.Attacker != null)
+                AddLogEntry(e.Attacker + (e.DamageAmt < 0 ? " healed " : " hit ") + hit + " for " + e.DamageAmt + " hit points.");
+            else
+                AddLogEntry(hit + " took " + e.DamageAmt + " damage from environment.");
+
+            if (e.TargetKilledOrDowned) // On kill print kill log and remove if enabled
+            {
+                AddLogEntry(hit.Name + " was killed" + (e.Attacker != null ? " by " + e.Attacker.Name : "") + ".");
+                if (!hit.IsPlayerCharacter && RemoveNPCsOnDeath)
+                    RemoveCharacter(hit); // Never remove dead players
+            }
         }
 
         private void EndTurn_Click(object sender, RoutedEventArgs e) => NextTurn();

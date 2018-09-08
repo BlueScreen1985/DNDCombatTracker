@@ -95,18 +95,16 @@ namespace DNDCombatTracker
             }
         }
 
-        public void TakeDamage(int amt, Character attacker = null)
+        public virtual void TakeDamage(int amt, Character attacker = null)
         {
-            HitPoints = Math.Min(HitPoints - amt, HitPointMax);
-            if (attacker == null)
-                AddLogEntry(Name + " took " + amt + " damage from environment.");
-            if (HitPoints <= 0)
-                Die(attacker);
+            HitPoints = Math.Max(Math.Min(HitPoints - amt, HitPointMax), -HitPointMax);
+            Hit(amt, attacker);
         }
 
         public void DealDamage(Character target, int amt)
         {
-            AddLogEntry(Name + (amt >= 0 ? " hit " : " healed ") + target.Name + " for " + Math.Abs(amt) + " hit points.");
+            if (target.HitPoints < 0 && amt < 0) // Heal from 0 hit points (negative HP technically doesn't exist in 5e)
+                target.HitPoints = 0;
             target.TakeDamage(amt, this);
         }
 
@@ -136,10 +134,10 @@ namespace DNDCombatTracker
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public event LogEntryEventHandler LogEntryAdded;
-        public void AddLogEntry(string logEntry) => LogEntryAdded?.Invoke(this, new LogEntryEventArgs(logEntry));
-
-        public event CharacterDeathEventHandler OnDeath;
-        public void Die(Character killer) => OnDeath?.Invoke(this, new CharacterDeathEventArgs(killer));
+        public event CharacterHitEventHandler OnHit;
+        public void Hit(int dmgAmt, Character attacker = null)
+        {
+            OnHit?.Invoke(this, new CharacterHitEventArgs(attacker, dmgAmt, HitPoints <= 0));
+        }
     }
 }

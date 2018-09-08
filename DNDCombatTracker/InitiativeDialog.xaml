@@ -5,7 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DNDCombatTracker"
         mc:Ignorable="d"
-        Title="{Binding Path=CharacterName, StringFormat={}Roll initiative for {0}}" ResizeMode="NoResize" SizeToContent="WidthAndHeight" ShowInTaskbar="False" Topmost="True">
+        Title="{Binding Path=CharacterName, StringFormat={}Roll initiative for {0}}" 
+        ResizeMode="NoResize" SizeToContent="WidthAndHeight" ShowInTaskbar="False" Topmost="True" 
+        Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}">
     <Grid Width="300" Height="43">
         <TextBox x:Name="InitiativeBox" PreviewTextInput="FilterNumberInput" Margin="70,0,90,10" TextWrapping="Wrap" Height="23" VerticalAlignment="Bottom" Text="{Binding Path=Initiative, UpdateSourceTrigger=PropertyChanged}"/>
         <Label Content="Initiative" HorizontalAlignment="Left" Margin="10,0,0,10" VerticalAlignment="Bottom"/>

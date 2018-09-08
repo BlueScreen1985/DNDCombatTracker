@@ -120,7 +120,8 @@ namespace DNDCombatTracker
             return null;
         }
 
-        public void ShowDamageDialog() {
+        public void ShowDamageDialog()
+        {
             DamageCharDialog damageCharDialog = new DamageCharDialog();
             if (damageCharDialog.ShowDialog() == true)
                 TakeDamage(damageCharDialog.DamageAmt);

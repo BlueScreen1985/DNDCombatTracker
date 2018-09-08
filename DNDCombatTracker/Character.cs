@@ -69,19 +69,6 @@ namespace DNDCombatTracker
             }
         }
 
-        /*
-        private bool isPlayerCharacter = false;
-        public bool IsPlayerCharacter
-        {
-            get => isPlayerCharacter;
-            set
-            {
-                isPlayerCharacter = value;
-                NotifyPropertyChanged("IsPlayerCharacter");
-                NotifyPropertyChanged("IsPlayerCharacterStr");
-            }
-        }
-        */
         public bool IsPlayerCharacter => this is PlayerCharacter; // Amazing, this looks like pseudocode
 
         private string notes = "";

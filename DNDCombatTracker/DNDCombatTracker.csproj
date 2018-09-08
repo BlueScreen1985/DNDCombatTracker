@@ -131,7 +131,7 @@
       <DependentUpon>NoteEditorDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="PlayerCharacter.cs" />
-    <Compile Include="PlayerStabilizedEvent.cs" />
+    <Compile Include="PlayerEvents.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

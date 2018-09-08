@@ -9,15 +9,14 @@ namespace DNDCombatTracker
         private int deathSaveFails = 0;
         private int deathSaveSuccess = 0;
 
-        public bool ShouldMakeDeathSave => HitPoints < 0;
+        public bool ShouldMakeDeathSave => HitPoints < 0 && HitPoints > -HitPointMax;
         public int DeathSaveFails
         {
             get => deathSaveFails;
             set
             {
                 deathSaveFails = value;
-                if (deathSaveFails >= 3)
-                    Hit(); // Self explanatory
+                MadeDeathSave(false);
 
                 NotifyPropertyChanged("DeathSaveFails");
             }
@@ -28,6 +27,7 @@ namespace DNDCombatTracker
             set
             {
                 deathSaveSuccess = value;
+                MadeDeathSave(true);
                 if (deathSaveSuccess >= 3)
                     HitPoints = 0; // Stabilize on 3 succesful saves
 
@@ -45,16 +45,13 @@ namespace DNDCombatTracker
                 DeathSaveFails++;
         }
 
-        public override void TakeDamage(int amt, Character attacker = null)
-        {
-            HitPoints = Math.Min(HitPoints - amt, HitPointMax);
-            if (attacker == null)
-                AddLogEntry(Name + " took " + amt + " damage from environment.");
-            if (HitPoints <= 0)
-                AddLogEntry(Name + " is unconscious.");
-        }
-
-        event PlayerStabilizedEventHandler OnStabilized;
+        public event PlayerStabilizedEventHandler OnStabilized;
         private void Stabilized() => OnStabilized?.Invoke(this, EventArgs.Empty);
+
+        public event DeathSaveEventHandler OnDeathSave;
+        private void MadeDeathSave(bool success)
+        {
+            OnDeathSave?.Invoke(this, new DeathSaveEventArgs(success, DeathSaveSuccess, DeathSaveFails));
+        }
     }
 }

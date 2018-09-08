@@ -167,9 +167,13 @@ namespace DNDCombatTracker
                 InsertCharacter(character); // If in combat insert character in correct initiative order
             else 
                 Characters.Add(character); // Otherwise just append it to the list
-
-            character.LogEntryAdded += LogEntryAdded;
+            
             character.OnHit += OnCharacterHit;
+            if (character is PlayerCharacter)
+            {
+                ((PlayerCharacter)character).OnStabilized += OnPlayerStabilized;
+                ((PlayerCharacter)character).OnDeathSave += OnPlayerMadeDeathSave;
+            }
         }
 
         // Inserts a character in the list in the right initiative order
@@ -180,9 +184,13 @@ namespace DNDCombatTracker
                 i++;
 
             Characters.Insert(i, character);
-
-            character.LogEntryAdded += LogEntryAdded;
+            
             character.OnHit += OnCharacterHit;
+            if (character is PlayerCharacter)
+            {
+                ((PlayerCharacter)character).OnStabilized += OnPlayerStabilized;
+                ((PlayerCharacter)character).OnDeathSave += OnPlayerMadeDeathSave;
+            }
         }
 
         // TODO: Find a better way to do this
@@ -242,6 +250,10 @@ namespace DNDCombatTracker
                 ActiveCharacterIndex = 0;
             else
                 ActiveCharacterIndex++;
+
+            PlayerCharacter playerCharacter = ActiveCharacter as PlayerCharacter;
+            if (playerCharacter != null && playerCharacter.ShouldMakeDeathSave)
+                playerCharacter.PromptDeathSave();
         }
 
         private void RemoveCharacter(Character character)
@@ -272,10 +284,30 @@ namespace DNDCombatTracker
 
             if (e.TargetKilledOrDowned) // On kill print kill log and remove if enabled
             {
-                AddLogEntry(hit.Name + " was killed" + (e.Attacker != null ? " by " + e.Attacker.Name : "") + ".");
+                AddLogEntry(hit.Name + " was " + 
+                    ((hit.IsPlayerCharacter && hit.HitPoints > -(hit.HitPointMax)) ? "downed" : "killed") + 
+                    (e.Attacker != null ? " by " + e.Attacker.Name : "") + ".");
                 if (!hit.IsPlayerCharacter && RemoveNPCsOnDeath)
                     RemoveCharacter(hit); // Never remove dead players
             }
+        }
+
+        private void OnPlayerStabilized(object sender, EventArgs e)
+        {
+            PlayerCharacter player = sender as PlayerCharacter;
+            AddLogEntry(player.Name + " is now stabilized.");
+        }
+
+        private void OnPlayerMadeDeathSave(object sender, DeathSaveEventArgs e)
+        {
+            PlayerCharacter player = sender as PlayerCharacter;
+            AddLogEntry(player.Name + (e.Success ? " succeeded" : " failed") + " their death save. Successes: "
+                + e.Successes + ", Failures: " + e.Failures);
+
+            if (e.Successes >= 3)
+                AddLogEntry(player.Name + " succeeded their death saves and is now stabilized.");
+            if (e.Failures >= 3)
+                AddLogEntry(player.Name + " failed their death saves and died.");
         }
 
         private void EndTurn_Click(object sender, RoutedEventArgs e) => NextTurn();

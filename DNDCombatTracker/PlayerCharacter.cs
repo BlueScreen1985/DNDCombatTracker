@@ -6,37 +6,36 @@ namespace DNDCombatTracker
     [Serializable]
     public class PlayerCharacter : Character
     {
-        private int deathSaveFails = 0;
-        private int deathSaveSuccess = 0;
-
         public override bool IsDead => HitPoints <= -HitPointMax;
 
         public bool ShouldMakeDeathSave => HitPoints < 0 && HitPoints > -HitPointMax;
-        public int DeathSaveFails
+        public int DeathSaveFails { get; private set; } = 0;
+        public void FailDeathSave()
         {
-            get => deathSaveFails;
-            set
+            DeathSaveFails++;
+            MadeDeathSave(false);
+            if (DeathSaveFails >= 3)
             {
-                deathSaveFails = value;
-                MadeDeathSave(false);
-                if (deathSaveFails >= 3)
-                    HitPoints = -HitPointMax; // You are dead. Not big surprise.
-
-                NotifyPropertyChanged("DeathSaveFails");
+                HitPoints = -HitPointMax; // You are dead. Not big surprise.
+                DeathSaveFails = 0;
+                DeathSaveSuccess = 0;
             }
+
+            NotifyPropertyChanged("DeathSaveFails");
         }
-        public int DeathSaveSuccess
+        public int DeathSaveSuccess { get; private set; } = 0;
+        public void SucceedDeathSave()
         {
-            get => deathSaveSuccess;
-            set
+            DeathSaveSuccess++;
+            MadeDeathSave(true);
+            if (DeathSaveSuccess >= 3)
             {
-                deathSaveSuccess = value;
-                MadeDeathSave(true);
-                if (deathSaveSuccess >= 3)
-                    HitPoints = 0; // Stabilize on 3 succesful saves
-
-                NotifyPropertyChanged("DeathSaveSuccess");
+                HitPoints = 0; // Stabilize on 3 succesful saves
+                DeathSaveFails = 0;
+                DeathSaveSuccess = 0;
             }
+
+            NotifyPropertyChanged("DeathSaveSuccess");
         }
 
         public override void TakeDamage(int amt, Character attacker = null)
@@ -52,9 +51,9 @@ namespace DNDCombatTracker
             DeathSaveDialog deathSaveDialog = new DeathSaveDialog(Name);
             bool? result = deathSaveDialog.ShowDialog();
             if (result == true)
-                DeathSaveSuccess++;
+                SucceedDeathSave();
             else if (result == false)
-                DeathSaveFails++;
+                FailDeathSave();
         }
 
         public event PlayerStabilizedEventHandler OnStabilized;

@@ -7,7 +7,7 @@ namespace DNDCombatTracker
     [Serializable]
     public class Character : INotifyPropertyChanged
     {
-        public string HitPointCounter => HitPoints + "/" + HitPointMax;
+        public string HitPointCounter => !IsDead ? (HitPoints + "/" + HitPointMax) : "DEAD";
         public string IsPlayerCharacterStr => IsPlayerCharacter ? "X" : "";
 
         // Bad verbose code because WPF kinda sucks and properties must send an updated event
@@ -33,6 +33,7 @@ namespace DNDCombatTracker
                 NotifyPropertyChanged("HitPointCounter");
             }
         }
+        public virtual bool IsDead => HitPoints <= 0;
 
         private int armorClass = 10;
         public int ArmorClass

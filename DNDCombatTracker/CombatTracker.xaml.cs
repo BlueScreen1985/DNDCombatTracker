@@ -48,6 +48,10 @@ namespace DNDCombatTracker
                 activeCharacterIndex = value;
                 NotifyPropertyChanged("ActiveCharacterIndex");
                 NotifyPropertyChanged("ActiveCharacter");
+
+                PlayerCharacter player = ActiveCharacter as PlayerCharacter;
+                if (player != null && player.ShouldMakeDeathSave && !player.IsDead)
+                    player.PromptDeathSave();
             }
         }
 
@@ -250,10 +254,6 @@ namespace DNDCombatTracker
                 ActiveCharacterIndex = 0;
             else
                 ActiveCharacterIndex++;
-
-            PlayerCharacter playerCharacter = ActiveCharacter as PlayerCharacter;
-            if (playerCharacter != null && playerCharacter.ShouldMakeDeathSave)
-                playerCharacter.PromptDeathSave();
         }
 
         private void RemoveCharacter(Character character)
@@ -268,8 +268,6 @@ namespace DNDCombatTracker
 
             if (ActiveCharacterIndex >= Characters.Count)
                 ActiveCharacterIndex = 0; // Prevents OOI errors
-
-            NotifyPropertyChanged("ActiveCharacter");
         }
 
         private void OnCharacterHit(object sender, CharacterHitEventArgs e)
@@ -278,14 +276,15 @@ namespace DNDCombatTracker
 
             // Print damage log
             if (e.Attacker != null)
-                AddLogEntry(e.Attacker + (e.DamageAmt < 0 ? " healed " : " hit ") + hit + " for " + e.DamageAmt + " hit points.");
+                AddLogEntry(e.Attacker.Name + (e.DamageAmt < 0 ? " healed " : " hit ") + 
+                    hit.Name + " for " + Math.Abs(e.DamageAmt) + " hit points.");
             else
-                AddLogEntry(hit + " took " + e.DamageAmt + " damage from environment.");
+                AddLogEntry(hit.Name + " took " + e.DamageAmt + " damage from environment.");
 
             if (e.TargetKilledOrDowned) // On kill print kill log and remove if enabled
             {
                 AddLogEntry(hit.Name + " was " + 
-                    ((hit.IsPlayerCharacter && hit.HitPoints > -(hit.HitPointMax)) ? "downed" : "killed") + 
+                    ((hit.IsPlayerCharacter && hit.HitPoints > -hit.HitPointMax) ? "downed" : "killed") + 
                     (e.Attacker != null ? " by " + e.Attacker.Name : "") + ".");
                 if (!hit.IsPlayerCharacter && RemoveNPCsOnDeath)
                     RemoveCharacter(hit); // Never remove dead players

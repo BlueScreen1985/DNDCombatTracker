@@ -9,6 +9,8 @@ namespace DNDCombatTracker
         private int deathSaveFails = 0;
         private int deathSaveSuccess = 0;
 
+        public override bool IsDead => HitPoints <= -HitPointMax;
+
         public bool ShouldMakeDeathSave => HitPoints < 0 && HitPoints > -HitPointMax;
         public int DeathSaveFails
         {
@@ -17,6 +19,8 @@ namespace DNDCombatTracker
             {
                 deathSaveFails = value;
                 MadeDeathSave(false);
+                if (deathSaveSuccess >= 3)
+                    HitPoints = -HitPointMax; // You are dead. Not big surprise.
 
                 NotifyPropertyChanged("DeathSaveFails");
             }
@@ -33,6 +37,14 @@ namespace DNDCombatTracker
 
                 NotifyPropertyChanged("DeathSaveSuccess");
             }
+        }
+
+        public override void TakeDamage(int amt, Character attacker = null)
+        {
+            bool wasDying = ShouldMakeDeathSave;
+            base.TakeDamage(amt, attacker);
+            if (wasDying && HitPoints >= 0)
+                Stabilized();
         }
 
         public void PromptDeathSave()

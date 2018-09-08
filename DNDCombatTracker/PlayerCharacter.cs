@@ -19,7 +19,7 @@ namespace DNDCombatTracker
             {
                 deathSaveFails = value;
                 MadeDeathSave(false);
-                if (deathSaveSuccess >= 3)
+                if (deathSaveFails >= 3)
                     HitPoints = -HitPointMax; // You are dead. Not big surprise.
 
                 NotifyPropertyChanged("DeathSaveFails");

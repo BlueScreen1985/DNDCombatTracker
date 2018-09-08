@@ -268,6 +268,8 @@ namespace DNDCombatTracker
 
             if (ActiveCharacterIndex >= Characters.Count)
                 ActiveCharacterIndex = 0; // Prevents OOI errors
+            else
+                ActiveCharacterIndex = ActiveCharacterIndex; // Small hack to force update
         }
 
         private void OnCharacterHit(object sender, CharacterHitEventArgs e)

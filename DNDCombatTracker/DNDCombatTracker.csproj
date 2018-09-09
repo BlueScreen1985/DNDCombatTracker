@@ -13,6 +13,21 @@
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -57,19 +72,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="AddCharacterDialog.xaml">
+    <Page Include="Dialog\AddCharacterDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="AddLogEntryDialog.xaml">
+    <Page Include="Dialog\AddLogEntryDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="AttackDialog.xaml">
+    <Page Include="Dialog\AttackDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="DamageCharDialog.xaml">
+    <Page Include="Dialog\DamageCharDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -77,40 +92,40 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Compile Include="AddCharacterDialog.xaml.cs">
+    <Compile Include="Dialog\AddCharacterDialog.xaml.cs">
       <DependentUpon>AddCharacterDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="AddLogEntryDialog.xaml.cs">
+    <Compile Include="Dialog\AddLogEntryDialog.xaml.cs">
       <DependentUpon>AddLogEntryDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="AttackDialog.xaml.cs">
+    <Compile Include="Dialog\AttackDialog.xaml.cs">
       <DependentUpon>AttackDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Character.cs" />
-    <Compile Include="CharacterHitEvent.cs" />
-    <Compile Include="DamageCharDialog.xaml.cs">
+    <Compile Include="Backend\Character.cs" />
+    <Compile Include="Backend\CharacterHitEvent.cs" />
+    <Compile Include="Dialog\DamageCharDialog.xaml.cs">
       <DependentUpon>DamageCharDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="DeathSaveDialog.xaml.cs">
+    <Compile Include="Dialog\DeathSaveDialog.xaml.cs">
       <DependentUpon>DeathSaveDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="InitiativeDialog.xaml.cs">
+    <Compile Include="Dialog\InitiativeDialog.xaml.cs">
       <DependentUpon>InitiativeDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="LogEntryEvent.cs" />
+    <Compile Include="Backend\LogEntryEvent.cs" />
     <Compile Include="CombatTracker.xaml.cs">
       <DependentUpon>CombatTracker.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="DeathSaveDialog.xaml">
+    <Page Include="Dialog\DeathSaveDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="InitiativeDialog.xaml">
+    <Page Include="Dialog\InitiativeDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -118,7 +133,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="NoteEditorDialog.xaml">
+    <Page Include="Dialog\NoteEditorDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -127,11 +142,11 @@
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="NoteEditorDialog.xaml.cs">
+    <Compile Include="Dialog\NoteEditorDialog.xaml.cs">
       <DependentUpon>NoteEditorDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="PlayerCharacter.cs" />
-    <Compile Include="PlayerEvents.cs" />
+    <Compile Include="Backend\PlayerCharacter.cs" />
+    <Compile Include="Backend\PlayerEvents.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -159,6 +174,18 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="d20_icon_kto_icon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.7.1">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.7.1 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

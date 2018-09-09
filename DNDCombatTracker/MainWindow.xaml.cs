@@ -110,7 +110,10 @@ namespace DNDCombatTracker
             combatWindow.Show();
         }
 
-        private void LoadCharacterData(object sender, RoutedEventArgs e)
+        private void LoadCharacterData(object sender, RoutedEventArgs e) => LoadCharacterDataImpl(true);
+        private void LoadPartyData(object sender, RoutedEventArgs e) => LoadCharacterDataImpl();
+
+        private void LoadCharacterDataImpl(bool append = false)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog
             {
@@ -127,13 +130,18 @@ namespace DNDCombatTracker
                 ObservableCollection<Character> newCharacters = formatter.Deserialize(stream) as ObservableCollection<Character>;
                 stream.Close();
 
-                PartyMembers.Clear();
+                if (!append)
+                    PartyMembers.Clear();
                 foreach (Character character in newCharacters)
                     PartyMembers.Add(character);
             }
         }
 
-        private void SaveCharacterData(object sender, RoutedEventArgs e)
+        private void SaveCharacterData(object sender, RoutedEventArgs e) 
+            => SaveCharacterDataImpl(new ObservableCollection<Character> { SelectedCharacter });
+        private void SavePartyData(object sender, RoutedEventArgs e) => SaveCharacterDataImpl(PartyMembers);
+
+        private void SaveCharacterDataImpl(ObservableCollection<Character> characters)
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog
             {
@@ -147,7 +155,7 @@ namespace DNDCombatTracker
             {
                 IFormatter formatter = new BinaryFormatter();
                 FileStream stream = new FileStream(saveFileDialog.FileName, FileMode.Create, FileAccess.Write);
-                formatter.Serialize(stream, PartyMembers);
+                formatter.Serialize(stream, characters);
                 stream.Close();
             }
         }

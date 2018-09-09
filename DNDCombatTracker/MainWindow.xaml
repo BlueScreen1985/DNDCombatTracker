@@ -9,9 +9,13 @@
     <DockPanel HorizontalAlignment="Left" LastChildFill="False" Margin="0">
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="_File">
-                <MenuItem Header="_Open" Click="LoadCharacterData"/>
-                <MenuItem Header="_Save" Click="SaveCharacterData"/>
+                <MenuItem Header="_Load party..." Click="LoadPartyData"/>
+                <MenuItem Header="_Save party..." Click="SavePartyData"/>
                 <MenuItem Header="_Exit" Click="Quit"/>
+            </MenuItem>
+            <MenuItem Header="_Character">
+                <MenuItem Header="_Add new..." Click="AddCharacter_Click"/>
+                <MenuItem Header="_Add from file..." Click="LoadCharacterData"/>
             </MenuItem>
         </Menu>
         <Grid Margin="0" DockPanel.Dock="Top" MinHeight="320">
@@ -25,7 +29,16 @@
                     <Style TargetType="{x:Type GridViewColumnHeader}">
                         <Setter Property="HorizontalContentAlignment" Value="Left" />
                     </Style>
+                    <ContextMenu x:Key="ItemContextMenu">
+                        <MenuItem Header="Save character..." Click="SaveCharacterData"/>
+                        <MenuItem Header="Remove" Click="RemoveCharacter_Click"/>
+                    </ContextMenu>
                 </ListView.Resources>
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="{x:Type ListViewItem}">
+                        <Setter Property="ContextMenu" Value="{StaticResource ItemContextMenu}"/>
+                    </Style>
+                </ListView.ItemContainerStyle>
                 <ListView.View>
                     <GridView AllowsColumnReorder="False">
                         <GridViewColumn Header="Name" Width="148" DisplayMemberBinding="{Binding Name}"/>

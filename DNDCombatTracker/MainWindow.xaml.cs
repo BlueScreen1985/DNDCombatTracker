@@ -1,5 +1,7 @@
 ﻿using Microsoft.Win32;
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
@@ -89,7 +91,8 @@ namespace DNDCombatTracker
         private void RemoveCharacter_Click(object sender, RoutedEventArgs e)
         {
             if (SelectedCharacterExists)
-                PartyMembers.Remove(SelectedCharacter);
+                foreach (Character selected in SelectedCharacters)
+                    PartyMembers.Remove(selected);
         }
 
         private void NewEncounter_Click(object sender, RoutedEventArgs e)
@@ -110,6 +113,21 @@ namespace DNDCombatTracker
             combatWindow.Show();
         }
 
+        private List<Character> SelectedCharacters
+        {
+            get
+            {
+                IList selectedItems = CharacterList.SelectedItems;
+                List<Character> selectedCharacters = new List<Character>();
+
+                // Convert to character list
+                foreach (Character character in selectedItems)
+                    selectedCharacters.Add(character as Character);
+
+                return selectedCharacters;
+            }
+        }
+
         private void LoadCharacterData(object sender, RoutedEventArgs e) => LoadCharacterDataImpl(true);
         private void LoadPartyData(object sender, RoutedEventArgs e) => LoadCharacterDataImpl();
 
@@ -127,7 +145,7 @@ namespace DNDCombatTracker
             {
                 IFormatter formatter = new BinaryFormatter();
                 FileStream stream = new FileStream(openFileDialog.FileName, FileMode.Open, FileAccess.Read);
-                ObservableCollection<Character> newCharacters = formatter.Deserialize(stream) as ObservableCollection<Character>;
+                List<Character> newCharacters = formatter.Deserialize(stream) as List<Character>;
                 stream.Close();
 
                 if (!append)
@@ -137,11 +155,10 @@ namespace DNDCombatTracker
             }
         }
 
-        private void SaveCharacterData(object sender, RoutedEventArgs e) 
-            => SaveCharacterDataImpl(new ObservableCollection<Character> { SelectedCharacter });
+        private void SaveCharacterData(object sender, RoutedEventArgs e) => SaveCharacterDataImpl(SelectedCharacters);
         private void SavePartyData(object sender, RoutedEventArgs e) => SaveCharacterDataImpl(PartyMembers);
 
-        private void SaveCharacterDataImpl(ObservableCollection<Character> characters)
+        private void SaveCharacterDataImpl(IEnumerable<Character> characters)
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog
             {

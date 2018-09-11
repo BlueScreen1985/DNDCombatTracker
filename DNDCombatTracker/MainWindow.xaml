@@ -26,7 +26,7 @@
             <Label Content="Party Manager" HorizontalAlignment="Left" Margin="10,8,0,0" VerticalAlignment="Top" Height="26" Width="87"/>
             <ListView x:Name="CharacterList" Margin="10,37" SelectedItem="{Binding SelectedCharacter, UpdateSourceTrigger=PropertyChanged}">
                 <ListView.Resources>
-                    <Style TargetType="{x:Type GridViewColumnHeader}">
+                    <Style x:Key="ShutUpVS" TargetType="{x:Type GridViewColumnHeader}">
                         <Setter Property="HorizontalContentAlignment" Value="Left" />
                     </Style>
                     <ContextMenu x:Key="ItemContextMenu">

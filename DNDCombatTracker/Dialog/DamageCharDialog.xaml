@@ -3,8 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:DNDCombatTracker"
-        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        xmlns:behavior="clr-namespace:DNDCombatTracker.Behaviors"
+        behavior:FocusBehavior.FocusFirst="True"
         mc:Ignorable="d"
         Title="Damage Character" Height="136" Width="248" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" ResizeMode="NoResize" SizeToContent="WidthAndHeight" ShowInTaskbar="False" Topmost="True">
     <Grid Width="242" Height="108">
@@ -12,9 +12,9 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Label Content="Damage Amount" HorizontalAlignment="Left" Margin="10,0,0,36" VerticalAlignment="Bottom"/>
-        <TextBox x:Name="DamageAmtInput" Text="{Binding Path=DamageAmt}"  PreviewTextInput="DamageAmtInput_PreviewTextInput" Height="23" Margin="115,0,10,37" TextWrapping="Wrap" VerticalAlignment="Bottom"/>
-        <Button x:Name="ButtonOK" Content="OK" HorizontalAlignment="Right" Margin="0,0,90,10" Width="75" Height="22" VerticalAlignment="Bottom" Click="ButtonOK_Click"/>
-        <Button x:Name="ButtonCancel" Content="Cancel" Margin="0,0,10,10" HorizontalAlignment="Right" Width="75" Height="22" VerticalAlignment="Bottom" Click="ButtonCancel_Click"/>
+        <TextBox x:Name="DamageAmtInput" Text="{Binding Path=DamageAmt}"  PreviewTextInput="DamageAmtInput_PreviewTextInput" Height="23" Margin="115,0,10,37" TextWrapping="Wrap" VerticalAlignment="Bottom" TabIndex="1"/>
+        <Button x:Name="ButtonOK" Content="OK" HorizontalAlignment="Right" Margin="0,0,90,10" Width="75" Height="22" VerticalAlignment="Bottom" Click="ButtonOK_Click" TabIndex="20"/>
+        <Button x:Name="ButtonCancel" Content="Cancel" Margin="0,0,10,10" HorizontalAlignment="Right" Width="75" Height="22" VerticalAlignment="Bottom" Click="ButtonCancel_Click" TabIndex="21"/>
         <Label Content="Note: Use negative damage to heal" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="222" FontWeight="Bold"/>
     </Grid>
 </Window>

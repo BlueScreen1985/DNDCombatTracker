@@ -3,7 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:DNDCombatTracker"
+        xmlns:behavior="clr-namespace:DNDCombatTracker.Behaviors"
+        behavior:FocusBehavior.FocusFirst="True"
         mc:Ignorable="d"
         Title="Attack/Heal..." ResizeMode="NoResize" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" SizeToContent="WidthAndHeight" ShowInTaskbar="False" Topmost="True">
     <Grid Width="280" Height="108">
@@ -11,10 +12,10 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Label Content="Damage Amount" HorizontalAlignment="Left" Margin="10,0,0,36" VerticalAlignment="Bottom"/>
-        <TextBox x:Name="DamageAmtInput" Text="{Binding Path=DamageAmt}"  PreviewTextInput="DamageAmtInput_PreviewTextInput" Height="23" Margin="115,0,10,37" TextWrapping="Wrap" VerticalAlignment="Bottom"/>
-        <Button x:Name="ButtonOK" Content="OK" Margin="115,0,90,10" Height="22" VerticalAlignment="Bottom" Click="ButtonOK_Click"/>
-        <Button x:Name="ButtonCancel" Content="Cancel" Margin="0,0,10,10" HorizontalAlignment="Right" Width="75" Height="22" VerticalAlignment="Bottom" Click="ButtonCancel_Click"/>
+        <TextBox x:Name="DamageAmtInput" Text="{Binding Path=DamageAmt}"  PreviewTextInput="DamageAmtInput_PreviewTextInput" Height="23" Margin="115,0,10,37" TextWrapping="Wrap" VerticalAlignment="Bottom" TabIndex="2"/>
+        <Button x:Name="ButtonOK" Content="OK" Margin="115,0,90,10" Height="22" VerticalAlignment="Bottom" Click="ButtonOK_Click" TabIndex="20"/>
+        <Button x:Name="ButtonCancel" Content="Cancel" Margin="0,0,10,10" HorizontalAlignment="Right" Width="75" Height="22" VerticalAlignment="Bottom" Click="ButtonCancel_Click" TabIndex="21"/>
         <Label Content="Target" HorizontalAlignment="Left" Margin="66,0,0,67" Height="26" VerticalAlignment="Bottom"/>
-        <ComboBox x:Name="TargetSelection" ItemsSource="{Binding Path=PossibleTargets}" DisplayMemberPath="Name" Margin="115,0,10,69" Height="22" VerticalAlignment="Bottom" SelectedIndex="0" IsEditable="True" IsReadOnly="True"/>
+        <ComboBox x:Name="TargetSelection" ItemsSource="{Binding Path=PossibleTargets}" DisplayMemberPath="Name" Margin="115,0,10,69" Height="22" VerticalAlignment="Bottom" SelectedIndex="0" IsEditable="True" IsReadOnly="True" TabIndex="1"/>
     </Grid>
 </Window>

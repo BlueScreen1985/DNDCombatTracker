@@ -3,13 +3,14 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:DNDCombatTracker"
+        xmlns:behavior="clr-namespace:DNDCombatTracker.Behaviors"
+        behavior:FocusBehavior.FocusFirst="True"
         mc:Ignorable="d" 
         Title="{Binding Path=CharacterName, StringFormat={}Roll death save for {0}}" 
         Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" 
         ShowInTaskbar="False" Topmost="True" ResizeMode="NoResize" SizeToContent="WidthAndHeight">
     <Grid Height="50" Width="175">
-        <Button x:Name="ButtonSuccess" Content="Success" Margin="0,0,90,10" VerticalAlignment="Bottom" Click="ButtonSuccess_Click" HorizontalAlignment="Right" Width="75"/>
-        <Button x:Name="ButtonFail" Content="Failure" HorizontalAlignment="Right" Margin="0,0,10,10" VerticalAlignment="Bottom" Width="75" IsCancel="True" Click="ButtonFail_Click"/>
+        <Button x:Name="ButtonSuccess" Content="Success" Margin="0,0,90,10" VerticalAlignment="Bottom" Click="ButtonSuccess_Click" HorizontalAlignment="Right" Width="75" TabIndex="20"/>
+        <Button x:Name="ButtonFail" Content="Failure" HorizontalAlignment="Right" Margin="0,0,10,10" VerticalAlignment="Bottom" Width="75" IsCancel="True" Click="ButtonFail_Click" TabIndex="21"/>
     </Grid>
 </Window>

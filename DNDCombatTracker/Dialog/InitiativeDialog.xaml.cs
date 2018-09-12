@@ -17,7 +17,18 @@ namespace DNDCombatTracker
                 NotifyPropertyChanged("CharacterName");
             }
         }
-        public int? Initiative { get; set; } = null;
+        private int? initiative;
+        public int? Initiative
+        {
+            get => initiative;
+            set
+            {
+                initiative = value;
+                NotifyPropertyChanged("Initiative");
+                NotifyPropertyChanged("InitiativeOK");
+            }
+        }
+        public bool InitiativeOK => Initiative != null;
 
         // Property change event handling
         public event PropertyChangedEventHandler PropertyChanged;

@@ -13,8 +13,8 @@
         </Grid.ColumnDefinitions>
         <Label Content="Damage Amount" HorizontalAlignment="Left" Margin="10,0,0,36" VerticalAlignment="Bottom"/>
         <TextBox x:Name="DamageAmtInput" Text="{Binding Path=DamageAmt}"  PreviewTextInput="DamageAmtInput_PreviewTextInput" Height="23" Margin="115,0,10,37" TextWrapping="Wrap" VerticalAlignment="Bottom" TabIndex="2"/>
-        <Button x:Name="ButtonOK" Content="OK" Margin="115,0,90,10" Height="22" VerticalAlignment="Bottom" Click="ButtonOK_Click" TabIndex="20"/>
-        <Button x:Name="ButtonCancel" Content="Cancel" Margin="0,0,10,10" HorizontalAlignment="Right" Width="75" Height="22" VerticalAlignment="Bottom" Click="ButtonCancel_Click" TabIndex="21"/>
+        <Button x:Name="ButtonOK" Content="OK" Margin="115,0,90,10" Height="22" VerticalAlignment="Bottom" Click="ButtonOK_Click" TabIndex="20" IsDefault="True"/>
+        <Button x:Name="ButtonCancel" Content="Cancel" Margin="0,0,10,10" HorizontalAlignment="Right" Width="75" Height="22" VerticalAlignment="Bottom" Click="ButtonCancel_Click" TabIndex="21" IsCancel="True"/>
         <Label Content="Target" HorizontalAlignment="Left" Margin="66,0,0,67" Height="26" VerticalAlignment="Bottom"/>
         <ComboBox x:Name="TargetSelection" ItemsSource="{Binding Path=PossibleTargets}" DisplayMemberPath="Name" Margin="115,0,10,69" Height="22" VerticalAlignment="Bottom" SelectedIndex="0" IsEditable="True" IsReadOnly="True" TabIndex="1"/>
     </Grid>

@@ -8,7 +8,7 @@
         mc:Ignorable="d"
         Title="Edit Character Notes" Height="300" Width="400" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" ShowInTaskbar="False" Topmost="True">
     <Grid>
-        <Button x:Name="ButtonOK" Content="Done" Margin="0,0,10,10" Height="22" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="75" Click="ButtonOK_Click" TabIndex="20"/>
+        <Button x:Name="ButtonOK" Content="Done" Margin="0,0,10,10" Height="22" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="75" Click="ButtonOK_Click" TabIndex="20" IsDefault="True"/>
         <TextBox x:Name="NotesBox" Margin="10,10,10,37" TextWrapping="Wrap" AcceptsReturn="True" Text="{Binding Path=Character.Notes}" TabIndex="1"/>
 
     </Grid>

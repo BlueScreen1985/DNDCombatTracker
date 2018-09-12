@@ -9,8 +9,8 @@
         Title="New Log Entry" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" ResizeMode="NoResize" SizeToContent="WidthAndHeight" ShowInTaskbar="False" Topmost="True">
     <Grid Width="294" Height="72">
         <TextBox x:Name="LogEntryBox" HorizontalAlignment="Left" Height="23" Margin="10,10,0,0" Text="{Binding Path=LogEntry}" TextWrapping="Wrap" VerticalAlignment="Top" Width="274" FontFamily="Consolas" TabIndex="1"/>
-        <Button x:Name="ButtonOK" Content="OK" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="75" Margin="0,0,90,10" Click="ButtonOK_Click" TabIndex="20"/>
-        <Button x:Name="ButtonCancel" Content="Cancel" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="75" Margin="0,0,10,10" Click="ButtonCancel_Click" TabIndex="21"/>
+        <Button x:Name="ButtonOK" Content="OK" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="75" Margin="0,0,90,10" Click="ButtonOK_Click" TabIndex="20" IsDefault="True"/>
+        <Button x:Name="ButtonCancel" Content="Cancel" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="75" Margin="0,0,10,10" Click="ButtonCancel_Click" TabIndex="21" IsCancel="True"/>
 
     </Grid>
 </Window>

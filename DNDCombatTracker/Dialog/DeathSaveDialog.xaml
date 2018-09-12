@@ -10,7 +10,7 @@
         Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" 
         ShowInTaskbar="False" Topmost="True" ResizeMode="NoResize" SizeToContent="WidthAndHeight">
     <Grid Height="50" Width="175">
-        <Button x:Name="ButtonSuccess" Content="Success" Margin="0,0,90,10" VerticalAlignment="Bottom" Click="ButtonSuccess_Click" HorizontalAlignment="Right" Width="75" TabIndex="20"/>
+        <Button x:Name="ButtonSuccess" Content="Success" Margin="0,0,90,10" VerticalAlignment="Bottom" Click="ButtonSuccess_Click" HorizontalAlignment="Right" Width="75" TabIndex="20" IsDefault="True"/>
         <Button x:Name="ButtonFail" Content="Failure" HorizontalAlignment="Right" Margin="0,0,10,10" VerticalAlignment="Bottom" Width="75" IsCancel="True" Click="ButtonFail_Click" TabIndex="21"/>
     </Grid>
 </Window>

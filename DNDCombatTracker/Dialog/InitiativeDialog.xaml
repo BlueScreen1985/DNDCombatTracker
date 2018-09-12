@@ -12,6 +12,6 @@
     <Grid Width="300" Height="43">
         <TextBox x:Name="InitiativeBox" PreviewTextInput="FilterNumberInput" Margin="70,0,90,10" TextWrapping="Wrap" Height="23" VerticalAlignment="Bottom" Text="{Binding Path=Initiative, UpdateSourceTrigger=PropertyChanged}" TabIndex="1"/>
         <Label Content="Initiative" HorizontalAlignment="Left" Margin="10,0,0,10" VerticalAlignment="Bottom"/>
-        <Button x:Name="ButtonOK" Content="OK" HorizontalAlignment="Left" Margin="215,0,0,11" VerticalAlignment="Bottom" Width="75" Click="ButtonOK_Click" TabIndex="20" IsEnabled="{Binding Path=InitiativeOK}"/>
+        <Button x:Name="ButtonOK" Content="OK" HorizontalAlignment="Left" Margin="215,0,0,11" VerticalAlignment="Bottom" Width="75" Click="ButtonOK_Click" TabIndex="20" IsEnabled="{Binding Path=InitiativeOK}" IsDefault="True"/>
     </Grid>
 </Window>

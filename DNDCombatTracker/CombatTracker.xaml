@@ -29,15 +29,15 @@
                 <TextBlock x:Name="CombatLog" Text="{Binding Path=CombatLogContent}" TextWrapping="Wrap" FontFamily="Consolas" Margin="6,0"/>
             </ScrollViewer>
         </Border>
-        <Button x:Name="NewLogEntry" IsEnabled="{Binding Path=IsCombatEnabled}" Content="New Log Entry" Margin="0,10,10,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="95" Height="22" Click="NewLogEntry_Click"/>
-        <Button x:Name="ToggleCombat" Content="{Binding Path=ToggleCombatButtonString}" HorizontalAlignment="Right" Margin="0,0,10,10" Grid.Row="2" Width="88" Click="ToggleCombat_Click" Height="22" VerticalAlignment="Bottom"/>
-        <Button x:Name="SaveCombatLog" Content="Save Log" HorizontalAlignment="Right" Margin="0,0,103,10" Grid.Row="2" Width="75" Height="22" VerticalAlignment="Bottom" Click="SaveCombatLog_Click"/>
+        <Button x:Name="NewLogEntry" IsEnabled="{Binding Path=IsCombatEnabled}" Content="New Log Entry" Margin="0,10,10,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="95" Height="22" Click="NewLogEntry_Click" TabIndex="1"/>
+        <Button x:Name="ToggleCombat" Content="{Binding Path=ToggleCombatButtonString}" HorizontalAlignment="Right" Margin="0,0,10,10" Grid.Row="2" Width="88" Click="ToggleCombat_Click" Height="22" VerticalAlignment="Bottom" TabIndex="3"/>
+        <Button x:Name="SaveCombatLog" Content="Save Log" HorizontalAlignment="Right" Margin="0,0,103,10" Grid.Row="2" Width="75" Height="22" VerticalAlignment="Bottom" Click="SaveCombatLog_Click" TabIndex="2"/>
         <Border BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}" BorderThickness="1" Grid.Column="1" Margin="3" CornerRadius="2">
             <Grid Margin="0" IsEnabled="{Binding Path=IsCombatEnabled}">
                 <Label x:Name="InitiativeCounter" Content="{Binding Path=ActiveCharacter.Initiative}" ContentStringFormat="Initiative: {0}" HorizontalAlignment="Left" Margin="10,26,0,0" VerticalAlignment="Top"/>
                 <Label x:Name="CharacterName" Content="{Binding Path=ActiveCharacter.NameAndIsPlayer}" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top"/>
                 <Label x:Name="HitPointCounter" Content="{Binding Path=ActiveCharacter.HitPointCounter}" ContentStringFormat="{}{0} HP" HorizontalAlignment="Right" Margin="0,26,10,0" VerticalAlignment="Top"/>
-                <Button x:Name="CharacterActions" Content="Actions" HorizontalAlignment="Left" Margin="10,0,0,10" VerticalAlignment="Bottom" Width="75" Click="CharacterActions_Click">
+                <Button x:Name="CharacterActions" Content="Actions" HorizontalAlignment="Left" Margin="10,0,0,10" VerticalAlignment="Bottom" Width="75" Click="CharacterActions_Click" TabIndex="10">
                     <Button.ContextMenu>
                         <ContextMenu>
                             <MenuItem Header="Attack/Heal..." Click="CharacterActionsAttack_Click"/>
@@ -46,14 +46,14 @@
                         </ContextMenu>
                     </Button.ContextMenu>
                 </Button>
-                <Button x:Name="EndTurn" Content="End Turn" HorizontalAlignment="Right" Margin="0,0,10,10" VerticalAlignment="Bottom" Width="75" Click="EndTurn_Click"/>
+                <Button x:Name="EndTurn" Content="End Turn" HorizontalAlignment="Right" Margin="0,0,10,10" VerticalAlignment="Bottom" Width="75" Click="EndTurn_Click" TabIndex="11"/>
             </Grid>
         </Border>
         <Border BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}" BorderThickness="1" Grid.Column="1" Margin="3,0" Grid.Row="1" CornerRadius="2">
             <Grid Margin="0">
                 <Label Content="All Characters" HorizontalAlignment="Left" Margin="10,2,0,0" VerticalAlignment="Top"/>
-                <Button x:Name="AddCharacterButton" Content="Add Character" HorizontalAlignment="Right" Margin="0,4,10,0" Height="22" VerticalAlignment="Top" Width="94" Click="AddCharacter_Click"/>
-                <ListView x:Name="CharactersList" Margin="10,33,10,10" ItemsSource="{Binding Path=Characters}" SelectedItem="{Binding Path=SelectedCharacter, UpdateSourceTrigger=PropertyChanged}">
+                <Button x:Name="AddCharacterButton" Content="Add Character" HorizontalAlignment="Right" Margin="0,4,10,0" Height="22" VerticalAlignment="Top" Width="94" Click="AddCharacter_Click" TabIndex="20"/>
+                <ListView x:Name="CharactersList" Margin="10,33,10,10" ItemsSource="{Binding Path=Characters}" SelectedItem="{Binding Path=SelectedCharacter, UpdateSourceTrigger=PropertyChanged}" TabIndex="21">
                     <ListView.Resources>
                         <Style TargetType="{x:Type GridViewColumnHeader}">
                             <Setter Property="HorizontalContentAlignment" Value="Left" />
@@ -87,6 +87,6 @@
                 </ListView>
             </Grid>
         </Border>
-        <CheckBox x:Name="RemoveNPCsOnDeathBox" Content="Remove NPCs on death" IsChecked="{Binding Path=RemoveNPCsOnDeath}" Grid.Column="1" HorizontalAlignment="Left" Margin="10,13,0,0" Grid.Row="2" VerticalAlignment="Top"/>
+        <CheckBox x:Name="RemoveNPCsOnDeathBox" Content="Remove NPCs on death" IsChecked="{Binding Path=RemoveNPCsOnDeath}" Grid.Column="1" HorizontalAlignment="Left" Margin="10,13,0,0" Grid.Row="2" VerticalAlignment="Top" TabIndex="22"/>
     </Grid>
 </Window>

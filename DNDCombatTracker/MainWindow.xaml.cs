@@ -103,7 +103,7 @@ namespace DNDCombatTracker
             {
                 InitiativeDialog initiativeDialog = new InitiativeDialog(character.Name);
                 if (initiativeDialog.ShowDialog() == true)
-                    character.Initiative = initiativeDialog.Initiative;
+                    character.Initiative = initiativeDialog.Initiative.Value;
                 else
                     character.Initiative = 0;
 

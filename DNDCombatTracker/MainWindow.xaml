@@ -8,14 +8,14 @@
         Title="DND Combat Tracker" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" ResizeMode="NoResize" SizeToContent="WidthAndHeight">
     <DockPanel HorizontalAlignment="Left" LastChildFill="False" Margin="0">
         <Menu DockPanel.Dock="Top">
-            <MenuItem Header="_File">
+            <MenuItem Header="_File" TabIndex="1">
                 <MenuItem Header="_Load party..." Click="LoadPartyData"/>
                 <MenuItem Header="_Save party..." Click="SavePartyData"/>
                 <MenuItem Header="_Exit" Click="Quit"/>
             </MenuItem>
-            <MenuItem Header="_Character">
+            <MenuItem Header="_Character" TabIndex="2">
                 <MenuItem Header="_Add new..." Click="AddCharacter_Click"/>
-                <MenuItem Header="_Add from file..." Click="LoadCharacterData"/>
+                <MenuItem Header="Add from _file..." Click="LoadCharacterData"/>
             </MenuItem>
         </Menu>
         <Grid Margin="0" DockPanel.Dock="Top" MinHeight="320">
@@ -24,7 +24,7 @@
                 <ColumnDefinition MaxWidth="293" MinWidth="293"/>
             </Grid.ColumnDefinitions>
             <Label Content="Party Manager" HorizontalAlignment="Left" Margin="10,8,0,0" VerticalAlignment="Top" Height="26" Width="87"/>
-            <ListView x:Name="CharacterList" Margin="10,37" SelectedItem="{Binding SelectedCharacter, UpdateSourceTrigger=PropertyChanged}">
+            <ListView x:Name="CharacterList" Margin="10,37" SelectedItem="{Binding SelectedCharacter, UpdateSourceTrigger=PropertyChanged}" TabIndex="11">
                 <ListView.Resources>
                     <Style x:Key="ShutUpVS" TargetType="{x:Type GridViewColumnHeader}">
                         <Setter Property="HorizontalContentAlignment" Value="Left" />
@@ -48,23 +48,23 @@
                     </GridView>
                 </ListView.View>
             </ListView>
-            <Button x:Name="NewEncounter" Content="New Combat Encounter" HorizontalAlignment="Right" Margin="0,10,10,0" VerticalAlignment="Top" Width="144" Height="22" Click="NewEncounter_Click"/>
-            <Button x:Name="AddCharacter" Content="Add Character" HorizontalAlignment="Right" Margin="0,0,10,10" VerticalAlignment="Bottom" Height="22" Click="AddCharacter_Click" Width="94"/>
+            <Button x:Name="NewEncounter" Content="New Combat Encounter" HorizontalAlignment="Right" Margin="0,10,10,0" VerticalAlignment="Top" Width="144" Height="22" Click="NewEncounter_Click" TabIndex="10"/>
+            <Button x:Name="AddCharacter" Content="Add Character" HorizontalAlignment="Right" Margin="0,0,10,10" VerticalAlignment="Bottom" Height="22" Click="AddCharacter_Click" Width="94" TabIndex="13"/>
             <Border x:Name="CharacterInfo" BorderBrush="Black" BorderThickness="1" Grid.Column="1" Margin="0,10,10,10" IsEnabled="{Binding SelectedCharacterExists}">
                 <Grid>
                     <Label Content="Character Name" HorizontalAlignment="Left" Margin="10,8,0,0" VerticalAlignment="Top"/>
-                    <TextBox x:Name="CharacterNameBox" Height="23" Margin="111,10,10,0" TextWrapping="Wrap" VerticalAlignment="Top" Text="{Binding SelectedCharacter.Name, UpdateSourceTrigger=PropertyChanged}"/>
+                    <TextBox x:Name="CharacterNameBox" Height="23" Margin="111,10,10,0" TextWrapping="Wrap" VerticalAlignment="Top" Text="{Binding SelectedCharacter.Name, UpdateSourceTrigger=PropertyChanged}" TabIndex="20"/>
                     <Label Content="HP" HorizontalAlignment="Right" Margin="0,36,55,0" VerticalAlignment="Top"/>
-                    <TextBox x:Name="HP" PreviewTextInput="FilterNumberInput" HorizontalAlignment="Right" Height="23" Margin="0,38,10,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="40" Text="{Binding SelectedCharacter.HitPoints, UpdateSourceTrigger=PropertyChanged}"/>
-                    <TextBox x:Name="MaxHP" PreviewTextInput="FilterNumberInput" HorizontalAlignment="Right" Height="23" Margin="0,66,10,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="40" Text="{Binding SelectedCharacter.HitPointMax, UpdateSourceTrigger=PropertyChanged}"/>
+                    <TextBox x:Name="HP" PreviewTextInput="FilterNumberInput" HorizontalAlignment="Right" Height="23" Margin="0,38,10,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="40" Text="{Binding SelectedCharacter.HitPoints, UpdateSourceTrigger=PropertyChanged}" TabIndex="22"/>
+                    <TextBox x:Name="MaxHP" PreviewTextInput="FilterNumberInput" HorizontalAlignment="Right" Height="23" Margin="0,66,10,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="40" Text="{Binding SelectedCharacter.HitPointMax, UpdateSourceTrigger=PropertyChanged}" TabIndex="23"/>
                     <Label Content="Max HP" HorizontalAlignment="Right" Margin="0,64,55,0" VerticalAlignment="Top"/>
-                    <TextBox x:Name="ArmorClass" PreviewTextInput="FilterNumberInput" Height="23" Margin="0,38,130,0" TextWrapping="Wrap" VerticalAlignment="Top" Text="{Binding SelectedCharacter.ArmorClass, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Right" Width="40"/>
+                    <TextBox x:Name="ArmorClass" PreviewTextInput="FilterNumberInput" Height="23" Margin="0,38,130,0" TextWrapping="Wrap" VerticalAlignment="Top" Text="{Binding SelectedCharacter.ArmorClass, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Right" Width="40" TabIndex="21"/>
                     <Label Content="Armor Class" Margin="0,36,175,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="73"/>
-                    <TextBox x:Name="CharacterNotes" Margin="10,121,10,10" TextWrapping="Wrap" AcceptsReturn="True" Text="{Binding SelectedCharacter.Notes, UpdateSourceTrigger=PropertyChanged}"/>
+                    <TextBox x:Name="CharacterNotes" Margin="10,121,10,10" TextWrapping="Wrap" AcceptsReturn="True" Text="{Binding SelectedCharacter.Notes, UpdateSourceTrigger=PropertyChanged}" TabIndex="24"/>
                     <Label Content="Notes" HorizontalAlignment="Left" Margin="10,90,0,0" VerticalAlignment="Top"/>
                 </Grid>
             </Border>
-            <Button x:Name="RemoveCharacter" Content="Remove Character" HorizontalAlignment="Right" Margin="0,0,109,10" VerticalAlignment="Bottom" Height="22" Click="RemoveCharacter_Click" Width="115" IsEnabled="{Binding SelectedCharacterExists}"/>
+            <Button x:Name="RemoveCharacter" Content="Remove Character" HorizontalAlignment="Right" Margin="0,0,109,10" VerticalAlignment="Bottom" Height="22" Click="RemoveCharacter_Click" Width="115" IsEnabled="{Binding SelectedCharacterExists}" TabIndex="12"/>
         </Grid>
     </DockPanel>
 </Window>

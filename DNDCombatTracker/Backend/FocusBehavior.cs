@@ -21,10 +21,7 @@ namespace DNDCombatTracker.Behaviors
                 return;
 
             if ((bool)args.NewValue)
-            {
-                control.Loaded += (sender, e) =>
-                    control.MoveFocus(new TraversalRequest(FocusNavigationDirection.Next));
-            }
+                control.Loaded += (sender, e) => control.MoveFocus(new TraversalRequest(FocusNavigationDirection.Next));
         }
     }
 }

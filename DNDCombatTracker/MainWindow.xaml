@@ -3,23 +3,20 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:DNDCombatTracker"
         mc:Ignorable="d"
         Title="D&amp;D Combat Tracker" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" ResizeMode="NoResize" SizeToContent="WidthAndHeight">
-    <DockPanel HorizontalAlignment="Left" LastChildFill="False" Margin="0">
+    <DockPanel Margin="0">
         <Menu DockPanel.Dock="Top">
-            <MenuItem Header="_File" TabIndex="1">
+            <MenuItem Header="_Character" TabIndex="1">
                 <MenuItem Header="_Load party..." Click="LoadPartyData"/>
                 <MenuItem Header="_Save party..." Click="SavePartyData"/>
-                <MenuItem Header="_Exit" Click="Quit"/>
-            </MenuItem>
-            <MenuItem Header="_Character" TabIndex="2">
                 <MenuItem Header="_Add new..." Click="AddCharacter_Click"/>
                 <MenuItem Header="Add from _file..." Click="LoadCharacterData"/>
             </MenuItem>
             <MenuItem Header="_Extras" TabIndex="2">
                 <MenuItem Header="_About" Click="About_Click"/>
                 <MenuItem Header="_Changelog" Click="Changelog_Click"/>
+                <MenuItem Header="_Quit" Click="Quit"/>
             </MenuItem>
         </Menu>
         <Grid Margin="0" DockPanel.Dock="Top" MinHeight="320">

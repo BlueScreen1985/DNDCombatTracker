@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -325,6 +327,33 @@ namespace DNDCombatTracker
 
             if (saveFileDialog.ShowDialog() == true)
                 File.WriteAllLines(saveFileDialog.FileName, combatLogContent.Split('\n'));
+        }
+
+        private void Quit(object sender, RoutedEventArgs e) => Close();
+
+        private void LoadCharacterData(object sender, RoutedEventArgs e) => LoadCharacterDataImpl(true);
+        private void LoadCharacterDataImpl(bool append = false)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog
+            {
+                InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
+                DefaultExt = ".pty",
+                Filter = "Party data file (.pty)|*.pty",
+                Multiselect = false
+            };
+
+            if (openFileDialog.ShowDialog() == true)
+            {
+                IFormatter formatter = new BinaryFormatter();
+                FileStream stream = new FileStream(openFileDialog.FileName, FileMode.Open, FileAccess.Read);
+                List<Character> newCharacters = formatter.Deserialize(stream) as List<Character>;
+                stream.Close();
+
+                if (!append)
+                    Characters.Clear();
+                foreach (Character character in newCharacters)
+                    Characters.Add(character);
+            }
         }
     }
 }

@@ -352,7 +352,13 @@ namespace DNDCombatTracker
                 if (!append)
                     Characters.Clear();
                 foreach (Character character in newCharacters)
+                {
+                    InitiativeDialog initiativeDialog = new InitiativeDialog(character.Name);
+                    if (initiativeDialog.ShowDialog() == true)
+                        character.Initiative = initiativeDialog.Initiative.Value;
+
                     Characters.Add(character);
+                }
             }
         }
     }

@@ -160,6 +160,11 @@ namespace DNDCombatTracker
 
         private void SaveCharacterDataImpl(IEnumerable<Character> characters)
         {
+            // Convert to List so saving is consistent
+            List<Character> charactersList = new List<Character>();
+            foreach (Character character in characters)
+                charactersList.Add(character);
+
             SaveFileDialog saveFileDialog = new SaveFileDialog
             {
                 InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
@@ -172,7 +177,7 @@ namespace DNDCombatTracker
             {
                 IFormatter formatter = new BinaryFormatter();
                 FileStream stream = new FileStream(saveFileDialog.FileName, FileMode.Create, FileAccess.Write);
-                formatter.Serialize(stream, characters);
+                formatter.Serialize(stream, charactersList);
                 stream.Close();
             }
         }

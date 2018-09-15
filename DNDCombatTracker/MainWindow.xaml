@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DNDCombatTracker"
         mc:Ignorable="d"
-        Title="DND Combat Tracker" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" ResizeMode="NoResize" SizeToContent="WidthAndHeight">
+        Title="D&amp;D Combat Tracker" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" ResizeMode="NoResize" SizeToContent="WidthAndHeight">
     <DockPanel HorizontalAlignment="Left" LastChildFill="False" Margin="0">
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="_File" TabIndex="1">

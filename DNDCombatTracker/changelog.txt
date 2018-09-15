@@ -1,0 +1,6 @@
+﻿** Version 1.1.0 **
+
+* Added support for saving/loading individual characters
+* Added support for death saving throws on player characters
+* Streamlined UI elements and improved keyboard navigation
+* Added about/changelog windows

@@ -1,0 +1,12 @@
+﻿<Window x:Class="DNDCombatTracker.Changelog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="Changelog" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" ResizeMode="NoResize" SizeToContent="WidthAndHeight">
+    <Grid Width="400">
+        <Button x:Name="ButtonOK" Content="OK" Margin="160,0,160,10" Height="22" VerticalAlignment="Bottom" IsDefault="True" Click="ButtonOK_Click"/>
+        <TextBlock Margin="10,10,10,37" TextWrapping="Wrap" Text="{Binding Path=ChangelogContent}"/>
+    </Grid>
+</Window>

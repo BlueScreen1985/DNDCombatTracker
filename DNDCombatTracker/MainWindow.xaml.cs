@@ -177,6 +177,9 @@ namespace DNDCombatTracker
             }
         }
 
-        private void Quit(object sender, RoutedEventArgs e) => this.Close();
+        private void About_Click(object sender, RoutedEventArgs e) => new About().Show();
+        private void Changelog_Click(object sender, RoutedEventArgs e) => new Changelog().Show();
+
+        private void Quit(object sender, RoutedEventArgs e) => Close();
     }
 }

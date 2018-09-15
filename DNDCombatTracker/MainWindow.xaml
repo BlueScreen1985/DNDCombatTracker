@@ -17,6 +17,10 @@
                 <MenuItem Header="_Add new..." Click="AddCharacter_Click"/>
                 <MenuItem Header="Add from _file..." Click="LoadCharacterData"/>
             </MenuItem>
+            <MenuItem Header="_Extras" TabIndex="2">
+                <MenuItem Header="_About" Click="About_Click"/>
+                <MenuItem Header="_Changelog" Click="Changelog_Click"/>
+            </MenuItem>
         </Menu>
         <Grid Margin="0" DockPanel.Dock="Top" MinHeight="320">
             <Grid.ColumnDefinitions>

@@ -26,9 +26,9 @@
         </Menu>
         <Grid Margin="0" DockPanel.Dock="Top" MinHeight="280">
             <Grid.RowDefinitions>
-                <RowDefinition MaxHeight="100" MinHeight="100"/>
-                <RowDefinition/>
-                <RowDefinition MaxHeight="42" MinHeight="42"/>
+                <RowDefinition MaxHeight="127" MinHeight="127" Height="139*"/>
+                <RowDefinition Height="158*"/>
+                <RowDefinition MaxHeight="42" MinHeight="42" Height="42*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition MinWidth="300"/>
@@ -44,20 +44,14 @@
             <Button x:Name="ToggleCombat" Content="{Binding Path=ToggleCombatButtonString}" HorizontalAlignment="Right" Margin="0,0,10,10" Grid.Row="2" Width="88" Click="ToggleCombat_Click" Height="22" VerticalAlignment="Bottom" TabIndex="3"/>
             <Button x:Name="SaveCombatLog" Content="Save Log" HorizontalAlignment="Right" Margin="0,0,103,10" Grid.Row="2" Width="75" Height="22" VerticalAlignment="Bottom" Click="SaveCombatLog_Click" TabIndex="2"/>
             <Border BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}" BorderThickness="1" Grid.Column="1" Margin="3" CornerRadius="2">
-                <Grid Margin="0" IsEnabled="{Binding Path=IsCombatEnabled}">
+                <Grid Margin="0,0,0,-1" IsEnabled="{Binding Path=IsCombatEnabled}">
                     <Label x:Name="InitiativeCounter" Content="{Binding Path=ActiveCharacter.Initiative}" ContentStringFormat="Initiative: {0}" HorizontalAlignment="Left" Margin="10,26,0,0" VerticalAlignment="Top"/>
                     <Label x:Name="CharacterName" Content="{Binding Path=ActiveCharacter.NameAndIsPlayer}" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top"/>
                     <Label x:Name="HitPointCounter" Content="{Binding Path=ActiveCharacter.HitPointCounter}" ContentStringFormat="{}{0} HP" HorizontalAlignment="Right" Margin="0,26,10,0" VerticalAlignment="Top"/>
-                    <Button x:Name="CharacterActions" Content="Actions" HorizontalAlignment="Left" Margin="10,0,0,10" VerticalAlignment="Bottom" Width="75" Click="CharacterActions_Click" TabIndex="10">
-                        <Button.ContextMenu>
-                            <ContextMenu>
-                                <MenuItem Header="Attack/Heal..." Click="CharacterActionsAttack_Click"/>
-                                <MenuItem Header="Take damage..." Click="CharacterActionsDamage_Click"/>
-                                <MenuItem Header="Remove from Combat" Click="CharacterActionsRemove_Click"/>
-                            </ContextMenu>
-                        </Button.ContextMenu>
-                    </Button>
-                    <Button x:Name="EndTurn" Content="End Turn" HorizontalAlignment="Right" Margin="0,0,10,10" VerticalAlignment="Bottom" Width="75" Click="EndTurn_Click" TabIndex="11"/>
+                    <Button x:Name="Attack" Content="Attack/Heal..." HorizontalAlignment="Left" Margin="10,0,0,37" VerticalAlignment="Bottom" Width="85" Click="CharacterActionsAttack_Click" TabIndex="10"/>
+                    <Button x:Name="TakeDamage" Content="Take Damage" HorizontalAlignment="Left" Margin="100,0,0,37" VerticalAlignment="Bottom" Width="85" Click="CharacterActionsDamage_Click" TabIndex="10"/>
+                    <Button x:Name="Remove" Content="Remove" HorizontalAlignment="Left" Margin="10,0,0,10" VerticalAlignment="Bottom" Width="85" Click="CharacterActionsRemove_Click" TabIndex="10"/>
+                    <Button x:Name="EndTurn" Content="End Turn" HorizontalAlignment="Right" Margin="0,0,133,10" VerticalAlignment="Bottom" Width="85" Click="EndTurn_Click" TabIndex="11"/>
                 </Grid>
             </Border>
             <Border BorderBrush="{DynamicResource {x:Static SystemColors.ControlDarkDarkBrushKey}}" BorderThickness="1" Grid.Column="1" Margin="3,0" Grid.Row="1" CornerRadius="2">
@@ -98,7 +92,7 @@
                     </ListView>
                 </Grid>
             </Border>
-            <CheckBox x:Name="RemoveNPCsOnDeathBox" Content="Remove NPCs on death" IsChecked="{Binding Path=RemoveNPCsOnDeath}" Grid.Column="1" HorizontalAlignment="Left" Margin="10,13,0,0" Grid.Row="2" VerticalAlignment="Top" TabIndex="22"/>
+            <CheckBox x:Name="RemoveNPCsOnDeathBox" Content="Remove NPCs on death" IsChecked="{Binding Path=RemoveNPCsOnDeath}" Grid.Column="1" HorizontalAlignment="Left" Margin="10,13,0,0" Grid.Row="2" VerticalAlignment="Top" TabIndex="22" Height="16" Width="142"/>
         </Grid>
     </DockPanel>
 </Window>

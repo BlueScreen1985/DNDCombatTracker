@@ -1,9 +1,12 @@
-﻿** Version 1.1.2 **
+﻿--- Revision 1 ---
+* Streamlined combat UI
+
+=== Version 1.1.2 ===
 
 * Characters can now be loaded in combat
 * Fixed bug where saving the entire party created a corrupt file
 
-** Version 1.1.0 **
+=== Version 1.1.0 ===
 
 * Added support for saving/loading individual characters
 * Added support for death saving throws on player characters
